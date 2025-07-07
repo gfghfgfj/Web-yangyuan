@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>javascript 异步编程练习</title>
+</head>   
+<body>
+
+    <h1>javascript 异步编程练习</h1>
+    <div id="demo">
+
+        </div>
+        <script>
+            // 优化：使用Promise封装延迟函数
+            const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+            // 使用async/await实现顺序执行
+            const printNumbers = async () => {
+                try {
+                    await delay(1000);
+                    console.log('1');
+                    document.getElementById('demo').innerHTML += '<p>1</p>';
+
+                    await delay(1000);
+                    console.log('2');
+                    document.getElementById('demo').innerHTML += '<p>2</p>';
+
+                    await delay(1000);
+                    console.log('3');
+                    document.getElementById('demo').innerHTML += '<p>3</p>';
+                } catch (error) {
+                    console.error('执行出错:', error);
+                }
+            };
+
+            // 启动执行
+            printNumbers();
+        </script>
+            

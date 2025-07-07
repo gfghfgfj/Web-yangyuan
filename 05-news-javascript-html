@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript 核心语法学习 - 优化版</title>
+    <style>
+        .output { margin: 20px; padding: 15px; border: 1px solid #ddd; border-radius: 4px; background-color: #f8f9fa; }
+        .code-block { font-family: monospace; color: #d63384; }
+    </style>
+</head>
+
+<body>
+    <h1>JavaScript 语法演示</h1>
+    <div class="output" id="consoleOutput"></div>
+
+    <script>
+        // 重定向console.log到页面显示
+        const consoleOutput = document.getElementById('consoleOutput');
+        const originalLog = console.log;
+        console.log = function(...args) {
+            originalLog(...args);
+            const logEntry = document.createElement('div');
+            logEntry.innerHTML = args.map(arg => typeof arg === 'object' ? JSON.stringify(arg) : arg).join(' ');
+            consoleOutput.appendChild(logEntry);
+        };
+
+        // 变量与类型演示
+        let numberVar = 100;
+        const apiKey = 'ssssx-=-dddd';
+        const booleanVar = true;
+
+        console.log('变量演示:', numberVar, apiKey, booleanVar);
+        console.log('类型检查:', typeof numberVar, typeof apiKey, typeof booleanVar);
+
+        // 类型转换示例
+        let stringNumber = '1';
+        console.log('字符串拼接:', numberVar + stringNumber);
+        console.log('数值相加:', numberVar + Number(stringNumber));
+
+        // 严格相等比较
+        let compareVar = '100';
+        console.log('类型比较:', typeof numberVar, typeof compareVar);
+        console.log('抽象相等:', numberVar == compareVar);
+        console.log('严格相等:', numberVar === compareVar);
+
+        // 条件语句示例
+        const currentTime = new Date().toLocaleTimeString();
+        const targetTime = '12:20:00';
+        console.log('当前时间:', currentTime);
+        if (currentTime.includes(targetTime.split(':').slice(0, 2).join(':'))) {
+            console.log('冲啊！');
+        } else {
+            console.log('假装学习……');
+        }
+
+        // 循环演示
+        console.log('For循环计数:');
+        for (let i = 1; i <= 5; i++) {
+            console.log(`计数: ${i}`);
+        }
+
+        // 改进的while循环
+        let remainingFood = 60;
+        console.log('While循环演示:');
+        while (remainingFood > 0) {
+            console.log(`剩余食物: ${remainingFood}%`);
+            remainingFood -= 15; // 每次减少15%
+        }
+
+        // 函数优化
+        function greet() {
+            return '你好，我是一个脚本！';
+        }
+        console.log(greet());
+
+        function displayContent(content) {
+            if (typeof content === 'undefined') {
+                throw new Error('必须提供内容参数');
+            }
+            return `以下是我介绍的内容： ${content}`;
+        }
+        console.log(displayContent('这是传入的参数'));
+
+        function combineContent(...contents) {
+            return `组合内容： ${contents.join(' | ')}`;
+        }
+        console.log(combineContent('参数1', '参数2', 444));
+
+        function processWithReturn(input) {
+            console.log('处理中:', input);
+            return `${input} - 这是返回值`;
+        }
+        const result = processWithReturn('带返回值的函数');
+        console.log('函数返回结果:', result);
+    </script>
+</body>
+
+</html>
